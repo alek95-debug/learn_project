@@ -19,5 +19,5 @@
 
 #### Шаг 1: Клонирование репозитория
 ```bash
-git clone https://github.com/ваш-логин/lab01.git
+git clone https://github.com/alek95-debug/learn_project.git
 cd lab01
