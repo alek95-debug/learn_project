@@ -7,5 +7,5 @@ class ItemSchema(Schema):
     name = String()
 
 
-    class ItemsOutSchema(Schema):
-        items = List(Nested(ItemSchema))
+class ItemsOutSchema(Schema):
+    items = List(Nested(ItemSchema))
