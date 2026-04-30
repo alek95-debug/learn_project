@@ -1,32 +1,17 @@
-from flask import Flask, jsonify
-from flask_cors import CORS
-import os
-app = Flask(__name__)
-CORS(app)
-@app.route('/')
-def home():
-    return jsonify({
-        'message': 'API системы учета товаров',
-        'version': '1.0.0',
-        'endpoints': {
-            'GET /': 'Информация об API',
-            'GET /health': 'Проверка состояния сервера'
-        }
-    })
+from apiflask import APIFlask
+from backend.api.routes import register_routes
 
-@app.route('/health')
-def health_check():
-    return jsonify({'status': 'ok'}), 200
+app = APIFlask(
+    __name__,
+    title="Beckend API",
+    version="1.0.0",
+    docs_path="/docs"
+)
 
-if __name__ == '__main__':
-    if not os.path.exists('data'):
-        os.makedirs('data')
-        print("Создана папка 'data' ")
+app.config["SYNC_LOCAL_SPEC"] = False
 
-        print("=" * 40)
-        print("Сервер запущен")
-        print("API доступен по адресу: http://localhost:5000/")
-        print("Фронтенд: frontend/index.html")
-        print("=" * 40)
+register_routes(app)
 
-    app.run(debug=True, host='0.0.0.0', port=5000)
+
+if __name__ == "__main__":
+    app.run(port=5001, debug=True)
